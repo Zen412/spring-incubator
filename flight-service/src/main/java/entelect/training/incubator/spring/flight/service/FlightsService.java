@@ -31,10 +31,12 @@ public class FlightsService {
     private final FlightRepository flightRepository;
 
     public FlightsService(FlightRepository flightRepository) {
+
         this.flightRepository = flightRepository;
     }
 
     public Flight createFlight(Flight flight) {
+
         return flightRepository.save(flight);
     }
 
@@ -48,11 +50,13 @@ public class FlightsService {
     }
 
     public Flight getFlight(Integer id) {
+
         return flightRepository.findById(id).orElse(null);
     }
 
     public List<Flight> getDiscountedFlights() {
-        final List<Flight> futureFlights = flightRepository.findByDepartureTimeBetweenDates(LocalDateTime.now(), LocalDateTime.now().plusDays(discountedFlightFutureDays));
+        final List<Flight> futureFlights =
+                flightRepository.findByDepartureTimeBetweenDates(LocalDateTime.now(), LocalDateTime.now().plusDays(discountedFlightFutureDays));
 
         // pick random flights
         final List<Flight> discountedFlights = futureFlights.stream()
